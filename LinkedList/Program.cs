@@ -32,15 +32,19 @@ class List
 
     public void addEnd(Node n)
     {
+        Node copy = new Node();
+        copy.Name = n.Name;
+        copy.Next = null;
+
         if (start == null && lastNode == null)
         {
-            start = n;
-            lastNode = n;
+            start = copy;
+            lastNode = copy;
         }
         else
         {
-            lastNode.Next = n;
-            lastNode = n;
+            lastNode.Next = copy;
+            lastNode = copy;
         }
     }
 
@@ -74,24 +78,32 @@ class Test
     public string name4 = "Susan";
     public string name5 = "Johnny";
 
-    List l = new List();
+    List l1 = new List();
+    List l2 = new List();
 
     public Node node1 = new Node();
     public Node node2 = new Node();
     public Node node3 = new Node();
-
+    public Node node4 = new Node();
+    public Node node5 = new Node();
 
     public Test()
     {
-        node1.Name = name2;
-        node2.Name = name4;
+        node1.Name = name1;
+        node2.Name = name2;
         node3.Name = name3;
+        node4.Name = name4;
+        node5.Name = name5;
 
-        l.addEnd(node1);
-        l.addEnd(node2);
-        l.addEnd(node3);
+        l1.addEnd(node1);
+        l1.addEnd(node2);
+        l1.addEnd(node3);
+        l1.Print();
 
-        l.Print();
+        l2.addEnd(node2);
+        l2.addEnd(node4);
+        l2.addEnd(node5);
+        l2.Print();
 
     }
 
