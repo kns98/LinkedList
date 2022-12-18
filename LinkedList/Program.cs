@@ -3,16 +3,6 @@ Console.WriteLine("Hello, World!");
 
 Test myTest = new Test();
 
-//
-// current to next is called iteration
-//
-
-Node currentNode = myTest.node1;
-Console.WriteLine("Starting Node: " + currentNode.Name);
-currentNode = currentNode.Next;
-Console.WriteLine("Next Node: " + currentNode.Name);
-currentNode = currentNode.Next;
-Console.WriteLine("Next Node: " + currentNode.Name);
 
 Console.ReadLine();
 
@@ -20,6 +10,60 @@ class Node
 {
     public string Name { get; set; }
     public Node Next { get; set; }
+}
+
+class List
+{
+    public List()
+    {
+
+    }
+
+    public Node start = null;
+
+    //
+    // Optimization to keep add Operation O(1)
+    // O(1) = time taken = one item
+    //
+    // Without this it would be O(n)
+    // O(n) means run through the entire list. i.e. all the items.
+    //
+    private Node lastNode = null;
+
+    public void addEnd(Node n)
+    {
+        if (start == null && lastNode == null)
+        {
+            start = n;
+            lastNode = n;
+        }
+        else
+        {
+            lastNode.Next = n;
+            lastNode = n;
+        }
+    }
+
+    public void Print()
+    {
+        if (start == null) return;
+
+        Node n = start;
+
+        while(n.Next!=null)
+        {
+            Console.WriteLine(n.Name);
+            n = n.Next;
+        }
+
+        Console.WriteLine(n.Name);
+
+    }
+
+   
+
+
+
 }
 
 class Test
@@ -30,22 +74,24 @@ class Test
     public string name4 = "Susan";
     public string name5 = "Johnny";
 
+    List l = new List();
+
     public Node node1 = new Node();
     public Node node2 = new Node();
     public Node node3 = new Node();
 
+
     public Test()
     {
-
         node1.Name = name2;
-        node1.Next = node2;
-
         node2.Name = name4;
-        node2.Next = node3;
-
-        //last node has null - doesn't point anywhere
         node3.Name = name3;
-        node3.Next = null;
+
+        l.addEnd(node1);
+        l.addEnd(node2);
+        l.addEnd(node3);
+
+        l.Print();
 
     }
 
