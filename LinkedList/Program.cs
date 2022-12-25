@@ -12,14 +12,40 @@ class Node
     public Node Next { get; set; }
 }
 
-class List
+interface IList
 {
-    public List()
+
+    void Print();
+}
+
+abstract class List : IList
+{
+    protected Node start = null;
+
+    public void Print()
+    {
+        if (start == null) return;
+
+        Node n = start;
+
+        while (n.Next != null)
+        {
+            Console.WriteLine(n.Name);
+            n = n.Next;
+        }
+
+        Console.WriteLine(n.Name);
+    }
+}
+
+
+
+class LinkedList : List
+{
+    public LinkedList()
     {
 
     }
-
-    public Node start = null;
 
     //
     // Optimization to keep add Operation O(1)
@@ -48,21 +74,6 @@ class List
         }
     }
 
-    public void Print()
-    {
-        if (start == null) return;
-
-        Node n = start;
-
-        while(n.Next!=null)
-        {
-            Console.WriteLine(n.Name);
-            n = n.Next;
-        }
-
-        Console.WriteLine(n.Name);
-
-    }
 
    
 
@@ -78,8 +89,8 @@ class Test
     public string name4 = "Susan";
     public string name5 = "Johnny";
 
-    List l1 = new List();
-    List l2 = new List();
+    LinkedList l1 = new LinkedList();
+    LinkedList l2 = new LinkedList();
 
     public Node node1 = new Node();
     public Node node2 = new Node();
