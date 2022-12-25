@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Xml.Linq;
+
 Console.WriteLine("Hello, World!");
 
 Test myTest = new Test();
@@ -6,10 +8,21 @@ Test myTest = new Test();
 
 Console.ReadLine();
 
-class Node
+abstract class Node
 {
     public string Name { get; set; }
-    public Node Next { get; set; }
+
+}
+
+class SingleNode : Node
+{
+    public SingleNode Next { get; set; }
+}
+
+class DoubleNode : Node
+{
+    public DoubleNode Next { get; set; }
+    public DoubleNode Prev { get; set; }
 }
 
 interface IList
@@ -18,67 +31,101 @@ interface IList
     void Print();
 }
 
-abstract class List : IList
+enum ListType
 {
-    protected Node start = null;
-
-    public void Print()
-    {
-        if (start == null) return;
-
-        Node n = start;
-
-        while (n.Next != null)
-        {
-            Console.WriteLine(n.Name);
-            n = n.Next;
-        }
-
-        Console.WriteLine(n.Name);
-    }
+    Single,
+    Double
 }
 
 
+abstract class List : IList
+{
+    protected Node start = null;
+    protected Node lastNode = null;
+
+    protected  ListType Type { get; set; }
+
+    public List(ListType type)
+    {
+        Type = type;
+    }
+
+    public abstract void Print();
+}
+
+/*
+class DoubleLinkedList : List
+{
+    public DoubleLinkedList() : base(ListType.Double)
+    {
+
+    }
+}
+*/
 
 class LinkedList : List
 {
-    public LinkedList()
+    public LinkedList() : base(ListType.Single)
     {
 
     }
-
-    //
-    // Optimization to keep add Operation O(1)
-    // O(1) = time taken = one item
-    //
-    // Without this it would be O(n)
-    // O(n) means run through the entire list. i.e. all the items.
-    //
-    private Node lastNode = null;
 
     public void addEnd(Node n)
     {
-        Node copy = new Node();
-        copy.Name = n.Name;
-        copy.Next = null;
+        SingleNode _snode = null;
+        DoubleNode _dnode = null;
 
-        if (start == null && lastNode == null)
+        if (Type == ListType.Single)
         {
-            start = copy;
-            lastNode = copy;
+            _snode = n as SingleNode;
+            SingleNode _lastNode = lastNode as SingleNode;
+
+            SingleNode copy = new SingleNode();
+            copy.Name = _snode.Name;
+            copy.Next = null;
+
+            if (start == null && _lastNode == null)
+            {
+                start = copy;
+                lastNode = copy;
+            }
+            else
+            {
+                _lastNode.Next = copy;
+                lastNode = copy;
+            }
         }
         else
         {
-            lastNode.Next = copy;
-            lastNode = copy;
+            throw new NotImplementedException();
         }
+
+
     }
 
+    public override void Print()
+    {
+        if (Type == ListType.Single)
+        {
+            SingleNode _start = start as SingleNode;
 
-   
+            if (start == null) return;
 
+            SingleNode n = _start;
 
+            while (n.Next != null)
+            {
+                Console.WriteLine(n.Name);
+                n = n.Next;
+            }
 
+            Console.WriteLine(n.Name);
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 class Test
@@ -92,11 +139,11 @@ class Test
     LinkedList l1 = new LinkedList();
     LinkedList l2 = new LinkedList();
 
-    public Node node1 = new Node();
-    public Node node2 = new Node();
-    public Node node3 = new Node();
-    public Node node4 = new Node();
-    public Node node5 = new Node();
+    public SingleNode node1 = new SingleNode();
+    public SingleNode node2 = new SingleNode();
+    public SingleNode node3 = new SingleNode();
+    public SingleNode node4 = new SingleNode();
+    public SingleNode node5 = new SingleNode();
 
     public Test()
     {
