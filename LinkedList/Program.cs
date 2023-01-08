@@ -54,7 +54,45 @@ abstract class List : IList
         Type = type;
     }
 
-    public abstract void Print();
+    public  void Print()
+    {
+        if (Type == ListType.Single)
+        {
+            SingleNode _start = start as SingleNode;
+
+            if (start == null) return;
+
+            SingleNode n = _start;
+
+            while (n.Next != null)
+            {
+                Console.WriteLine(n.Name);
+                n = n.Next;
+            }
+
+            Console.WriteLine(n.Name);
+        }
+        else if (Type == ListType.Double)
+        {
+            DoubleNode _start = start as DoubleNode;
+
+            if (start == null) return;
+
+            DoubleNode n = _start;
+
+            while (n.Next != null)
+            {
+                Console.WriteLine(n.Name);
+                n = n.Next;
+            }
+
+            Console.WriteLine(n.Name);
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 /*
@@ -107,30 +145,53 @@ class SingleLinkedList : List
 
     }
 
-    public override void Print()
+    
+}
+
+
+class DoubleLinkedList : List
+{
+    public DoubleLinkedList() : base(ListType.Double)
     {
+
+    }
+
+    public void addEnd(Node n)
+    {
+        SingleNode _snode = null;
+        DoubleNode _dnode = null;
+
         if (Type == ListType.Single)
         {
-            SingleNode _start = start as SingleNode;
+            _snode = n as SingleNode;
+            SingleNode _lastNode = lastNode as SingleNode;
 
-            if (start == null) return;
+            SingleNode copy = new SingleNode();
+            copy.Name = _snode.Name;
+            copy.Next = null;
 
-            SingleNode n = _start;
-
-            while (n.Next != null)
+            if (start == null && _lastNode == null)
             {
-                Console.WriteLine(n.Name);
-                n = n.Next;
+                start = copy;
+                lastNode = copy;
             }
-
-            Console.WriteLine(n.Name);
+            else
+            {
+                _lastNode.Next = copy;
+                lastNode = copy;
+            }
         }
         else
         {
             throw new NotImplementedException();
         }
+
+
     }
+
+   
 }
+
 
 class Test
 {
