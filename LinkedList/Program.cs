@@ -203,17 +203,49 @@ class Test
     public string name5 = "Johnny";
 
     SingleLinkedList sl1 = new SingleLinkedList();
-    SingleLinkedList sl2 = new SingleLinkedList();
-
+    
     public SingleNode snode1 = new SingleNode();
     public SingleNode snode2 = new SingleNode();
     public SingleNode snode3 = new SingleNode();
     public SingleNode snode4 = new SingleNode();
     public SingleNode snode5 = new SingleNode();
 
+    DoubleLinkedList dl1 = new DoubleLinkedList();
+
+    public DoubleNode dnode1 = new DoubleNode();
+    public DoubleNode dnode2 = new DoubleNode();
+    public DoubleNode dnode3 = new DoubleNode();
+    public DoubleNode dnode4 = new DoubleNode();
+    public DoubleNode dnode5 = new DoubleNode();
+
+
+
     public Test()
     {
         TestSingle();
+        TestDouble();
+    }
+    
+    private void TestDouble()
+    {
+        dnode1.Name = name1;
+        dnode2.Name = name2;
+        dnode3.Name = name3;
+        dnode4.Name = name4;
+        dnode5.Name = name5;
+
+        dl1.addEnd(dnode1);
+        dl1.addEnd(dnode2);
+        dl1.addEnd(dnode3);
+        dl1.addEnd(dnode2);
+        dl1.addEnd(dnode4);
+        dl1.addEnd(dnode5);
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("Printing Double Linked List");
+        dl1.Print();
+
     }
 
     private void TestSingle()
@@ -227,12 +259,14 @@ class Test
         sl1.addEnd(snode1);
         sl1.addEnd(snode2);
         sl1.addEnd(snode3);
-        sl1.Print();
+        sl1.addEnd(snode2);
+        sl1.addEnd(snode4);
+        sl1.addEnd(snode5);
 
-        sl2.addEnd(snode2);
-        sl2.addEnd(snode4);
-        sl2.addEnd(snode5);
-        sl2.Print();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("Printing Single Linked List");
+        sl1.Print();
 
     }
 
