@@ -158,17 +158,18 @@ class DoubleLinkedList : List
 
     public void addEnd(Node n)
     {
-        SingleNode _snode = null;
+        DoubleNode _snode = null;
         DoubleNode _dnode = null;
 
-        if (Type == ListType.Single)
+        if (Type == ListType.Double)
         {
-            _snode = n as SingleNode;
-            SingleNode _lastNode = lastNode as SingleNode;
+            _snode = n as DoubleNode;
+            DoubleNode _lastNode = lastNode as DoubleNode;
+            DoubleNode copy = new DoubleNode();
 
-            SingleNode copy = new SingleNode();
             copy.Name = _snode.Name;
             copy.Next = null;
+            copy.Prev = null;
 
             if (start == null && _lastNode == null)
             {
@@ -201,32 +202,37 @@ class Test
     public string name4 = "Susan";
     public string name5 = "Johnny";
 
-    SingleLinkedList l1 = new SingleLinkedList();
-    SingleLinkedList l2 = new SingleLinkedList();
+    SingleLinkedList sl1 = new SingleLinkedList();
+    SingleLinkedList sl2 = new SingleLinkedList();
 
-    public SingleNode node1 = new SingleNode();
-    public SingleNode node2 = new SingleNode();
-    public SingleNode node3 = new SingleNode();
-    public SingleNode node4 = new SingleNode();
-    public SingleNode node5 = new SingleNode();
+    public SingleNode snode1 = new SingleNode();
+    public SingleNode snode2 = new SingleNode();
+    public SingleNode snode3 = new SingleNode();
+    public SingleNode snode4 = new SingleNode();
+    public SingleNode snode5 = new SingleNode();
 
     public Test()
     {
-        node1.Name = name1;
-        node2.Name = name2;
-        node3.Name = name3;
-        node4.Name = name4;
-        node5.Name = name5;
+        TestSingle();
+    }
 
-        l1.addEnd(node1);
-        l1.addEnd(node2);
-        l1.addEnd(node3);
-        l1.Print();
+    private void TestSingle()
+    {
+        snode1.Name = name1;
+        snode2.Name = name2;
+        snode3.Name = name3;
+        snode4.Name = name4;
+        snode5.Name = name5;
 
-        l2.addEnd(node2);
-        l2.addEnd(node4);
-        l2.addEnd(node5);
-        l2.Print();
+        sl1.addEnd(snode1);
+        sl1.addEnd(snode2);
+        sl1.addEnd(snode3);
+        sl1.Print();
+
+        sl2.addEnd(snode2);
+        sl2.addEnd(snode4);
+        sl2.addEnd(snode5);
+        sl2.Print();
 
     }
 
