@@ -6,6 +6,7 @@ Console.WriteLine("Hello, World!");
 Test myTest = new Test();
 
 
+
 Console.ReadLine();
 
 abstract class Node
@@ -21,7 +22,10 @@ class SingleNode : Node
 
 class DoubleNode : Node
 {
+    //black arrow
     public DoubleNode Next { get; set; }
+
+    //pink arrow
     public DoubleNode Prev { get; set; }
 }
 
@@ -63,9 +67,9 @@ class DoubleLinkedList : List
 }
 */
 
-class LinkedList : List
+class SingleLinkedList : List
 {
-    public LinkedList() : base(ListType.Single)
+    public SingleLinkedList() : base(ListType.Single)
     {
 
     }
@@ -136,8 +140,8 @@ class Test
     public string name4 = "Susan";
     public string name5 = "Johnny";
 
-    LinkedList l1 = new LinkedList();
-    LinkedList l2 = new LinkedList();
+    SingleLinkedList l1 = new SingleLinkedList();
+    SingleLinkedList l2 = new SingleLinkedList();
 
     public SingleNode node1 = new SingleNode();
     public SingleNode node2 = new SingleNode();
