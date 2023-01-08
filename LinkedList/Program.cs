@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Security;
 using System.Xml.Linq;
 
 Console.WriteLine("Hello, World!");
@@ -48,6 +49,11 @@ abstract class List : IList
     protected Node lastNode = null;
 
     protected  ListType Type { get; set; }
+
+    public Node GetStart()
+    {
+        return start;
+    }
 
     public List(ListType type)
     {
@@ -179,6 +185,7 @@ class DoubleLinkedList : List
             else
             {
                 _lastNode.Next = copy;
+                _lastNode.Next.Prev = _lastNode;
                 lastNode = copy;
             }
         }
@@ -241,6 +248,12 @@ class Test
         dl1.addEnd(dnode4);
         dl1.addEnd(dnode5);
 
+        DoubleNode cur = dl1.GetStart() as DoubleNode;
+
+        Console.WriteLine("Testing Next and Prev");
+        Console.WriteLine( cur.Next.Next.Next.Next.Next.Prev.Name );
+
+
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine("Printing Double Linked List");
@@ -262,6 +275,9 @@ class Test
         sl1.addEnd(snode2);
         sl1.addEnd(snode4);
         sl1.addEnd(snode5);
+
+
+
 
         Console.WriteLine();
         Console.WriteLine();
